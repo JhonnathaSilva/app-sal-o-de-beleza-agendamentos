@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ThaisMello</string>
+    <string name="bem_vindo_de_volta">Bem-vindo de volta!</string>
+    <string name="entre_para_continuar">Entre para continuar</string>
+    <string name="icone_de_uma_carta">Icone de uma carta</string>
+    <string name="mostrar_senha">Mostrar senha</string>
+    <string name="esconder_senha">Esconder senha</string>
+    <string name="icone_de_um_cadeado">icone de um cadeado</string>
+    <string name="esqueceu_a_senha">   Esqueceu a senha?</string>
+    <string name="entrar">Entrar</string>
+    <string name="ainda_n_o_tem_uma_conta">Ainda não tem uma conta?</string>
+    <string name="cadastre_se_gratuitamente">Cadastre-se gratuitamente</string>
+</resources>
