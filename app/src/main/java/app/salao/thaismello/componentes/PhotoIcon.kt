@@ -1,4 +1,4 @@
-package app.salao.thaismello.Componentes
+package app.salao.thaismello.componentes
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxSize

@@ -1,4 +1,4 @@
-package app.salao.thaismello.Componentes
+package app.salao.thaismello.componentes
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

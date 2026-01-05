@@ -1,4 +1,4 @@
-package app.salao.thaismello
+package app.salao.thaismello.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -43,8 +43,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.salao.thaismello.Componentes.GradientButton
-import app.salao.thaismello.Componentes.PhotoIcon
+import app.salao.thaismello.componentes.GradientButton
+import app.salao.thaismello.componentes.PhotoIcon
+import app.salao.thaismello.R
 import app.salao.thaismello.ui.theme.DarkGray
 import app.salao.thaismello.ui.theme.Gold
 import app.salao.thaismello.ui.theme.LightGray
