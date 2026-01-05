@@ -7,30 +7,23 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Lock
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import app.salao.thaismello.ui.theme.ColorGoldDark
 import app.salao.thaismello.ui.theme.ColorGoldLight
 import app.salao.thaismello.ui.theme.Gold
 import app.salao.thaismello.ui.theme.LightGray
 import app.salao.thaismello.ui.theme.NearBlack
 
 @Composable
-fun GoldGradientButton(
+fun GradientButton(
     text: String,
     onClick: () -> Unit,
     color1: Color = Gold,
@@ -75,5 +68,5 @@ fun GoldGradientButton(
 @Preview
 @Composable
 private fun GradientButtonPreview() {
-    GoldGradientButton(onClick = {}, text = "Esqueceu a senha?", color1 = LightGray, color2 = NearBlack, textColor = Gold)
+    GradientButton(onClick = {}, text = "Esqueceu a senha?", color1 = LightGray, color2 = NearBlack, textColor = Gold)
 }

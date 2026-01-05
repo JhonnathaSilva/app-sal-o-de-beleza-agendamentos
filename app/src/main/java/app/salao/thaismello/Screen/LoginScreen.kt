@@ -1,11 +1,9 @@
-package app.salao.thaismello.Screen
+package app.salao.thaismello
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,7 +22,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -46,19 +43,20 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.salao.thaismello.Componentes.GoldGradientButton
+import app.salao.thaismello.Componentes.GradientButton
 import app.salao.thaismello.Componentes.PhotoIcon
-import app.salao.thaismello.R
 import app.salao.thaismello.ui.theme.DarkGray
 import app.salao.thaismello.ui.theme.Gold
 import app.salao.thaismello.ui.theme.LightGray
 import app.salao.thaismello.ui.theme.NearBlack
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    onNavigateToRegister: () -> Unit = {}
+) {
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
-    var passwordHidden by rememberSaveable { mutableStateOf(true) }
+    var passwordHidden by rememberSaveable { mutableStateOf(false) }
     val scrollState = rememberScrollState()
 
     Surface(
@@ -66,7 +64,7 @@ fun LoginScreen() {
             .fillMaxSize()
             .background(
                 brush = Brush.verticalGradient(
-                    colors = listOf(Gold, NearBlack, DarkGray ),
+                    colors = listOf(Gold, NearBlack, DarkGray),
                     startY = 0.0f
                 )
             ),
@@ -132,7 +130,8 @@ fun LoginScreen() {
                         unfocusedContainerColor = DarkGray,
                         focusedContainerColor = DarkGray,
                         focusedLeadingIconColor = Gold,
-                        focusedBorderColor = Gold
+                        focusedBorderColor = Gold,
+                        unfocusedBorderColor = DarkGray,
                     )
                 )
 
@@ -150,8 +149,7 @@ fun LoginScreen() {
                         )
                     },
                     visualTransformation = if (passwordHidden)
-                        PasswordVisualTransformation()
-                    else VisualTransformation.None,
+                        PasswordVisualTransformation() else VisualTransformation.None,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.NumberPassword,
                         imeAction = ImeAction.Done
@@ -173,7 +171,8 @@ fun LoginScreen() {
                         focusedContainerColor = DarkGray,
                         focusedLeadingIconColor = Gold,
                         focusedBorderColor = Gold,
-                        focusedTrailingIconColor = Gold
+                        focusedTrailingIconColor = Gold,
+                        unfocusedBorderColor = DarkGray,
                     )
                 )
 
@@ -183,12 +182,12 @@ fun LoginScreen() {
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(15.dp)
                 ) {
-                    GoldGradientButton(
+                    GradientButton(
                         onClick = {},
                         text = stringResource(R.string.entrar)
                     )
 
-                    GoldGradientButton(
+                    GradientButton(
                         onClick = {},
                         text = stringResource(R.string.esqueceu_a_senha),
                         textColor = Gold,
@@ -209,7 +208,7 @@ fun LoginScreen() {
                         color = LightGray
                     )
 
-                    TextButton(onClick = {}) {
+                    TextButton(onClick = onNavigateToRegister) {
                         Text(
                             text = stringResource(R.string.cadastre_se_gratuitamente),
                             color = Gold,
