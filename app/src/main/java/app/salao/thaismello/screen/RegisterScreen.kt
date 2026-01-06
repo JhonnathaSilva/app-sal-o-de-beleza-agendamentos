@@ -48,9 +48,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.salao.thaismello.componentes.GradientButton
-import app.salao.thaismello.componentes.PhotoIcon
-import app.salao.thaismello.componentes.SalonTextField
+import app.salao.thaismello.componente.GradientButton
+import app.salao.thaismello.componente.PhotoIcon
+import app.salao.thaismello.componente.SalonTextField
 import app.salao.thaismello.ui.theme.ColorGoldLight
 import app.salao.thaismello.ui.theme.DarkGray
 import app.salao.thaismello.ui.theme.Gold
@@ -476,7 +476,7 @@ private fun formatPhone(digits: String): String {
 
 @Preview(showBackground = true)
 @Composable
-private fun RegisterScreenPreview() {
+fun RegisterScreenPreview() {
     RegisterScreen()
 }
 

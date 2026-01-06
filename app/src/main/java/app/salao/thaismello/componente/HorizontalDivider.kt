@@ -1,4 +1,4 @@
-package app.salao.thaismello.componentes
+package app.salao.thaismello.componente
 
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable

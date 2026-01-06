@@ -1,4 +1,4 @@
-package app.salao.thaismello.componentes
+package app.salao.thaismello.componente
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -24,12 +24,13 @@ import app.salao.thaismello.ui.theme.NearBlack
 
 @Composable
 fun GradientButton(
+    modifier: Modifier = Modifier,
     text: String,
     onClick: () -> Unit,
     color1: Color = Gold,
     color2: Color = ColorGoldLight,
-    textColor: Color = Color.Black,
-    modifier: Modifier = Modifier
+    textColor: Color = Color.Black
+
 ) {
     val shape = RoundedCornerShape(20)
 

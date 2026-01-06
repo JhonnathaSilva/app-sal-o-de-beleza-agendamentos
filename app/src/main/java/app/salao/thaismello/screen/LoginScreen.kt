@@ -43,9 +43,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.salao.thaismello.componentes.GradientButton
-import app.salao.thaismello.componentes.PhotoIcon
 import app.salao.thaismello.R
+import app.salao.thaismello.componente.GradientButton
+import app.salao.thaismello.componente.PhotoIcon
 import app.salao.thaismello.ui.theme.DarkGray
 import app.salao.thaismello.ui.theme.Gold
 import app.salao.thaismello.ui.theme.LightGray
@@ -57,7 +57,7 @@ fun LoginScreen(
 ) {
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
-    var passwordHidden by rememberSaveable { mutableStateOf(false) }
+    var passwordHidden by rememberSaveable { mutableStateOf(true) }
     val scrollState = rememberScrollState()
 
     Surface(

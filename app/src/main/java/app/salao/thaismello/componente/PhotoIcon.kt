@@ -1,4 +1,4 @@
-package app.salao.thaismello.componentes
+package app.salao.thaismello.componente
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxSize
@@ -42,6 +42,6 @@ fun PhotoIcon(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-private fun PhotoIconPreview() {
+fun PhotoIconPreview() {
     PhotoIcon()
 }
