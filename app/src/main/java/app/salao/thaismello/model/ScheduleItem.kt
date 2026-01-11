@@ -5,9 +5,10 @@ import java.sql.Date
 data class ScheduleItem(
     val hairProcedure: String,
     val hairdresser: String,
-    val date: Date,
+    val date: String,
     val hours: String,
-    val timeProcedure: String
+    val timeProcedure: String,
+    val price: Double
 )
 
 
