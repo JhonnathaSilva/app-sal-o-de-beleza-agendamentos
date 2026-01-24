@@ -61,7 +61,8 @@ import kotlin.Unit
 @Composable
 fun LoginScreen(
     loginViewModel: LoginViewModel = viewModel(),
-    onNavigateToRegister: () -> Unit = {}
+    onNavigationToHome: () -> Unit,
+    onNavigateToRegister: () -> Unit
 ) {
 
     var passwordHidden by rememberSaveable { mutableStateOf(true) }
@@ -239,5 +240,5 @@ fun LoginScreen(
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    LoginScreen(onNavigationToHome = {}, onNavigateToRegister = {})
 }

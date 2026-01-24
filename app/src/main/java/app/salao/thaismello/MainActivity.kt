@@ -9,14 +9,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import app.salao.thaismello.login.LoginScreen
 import app.salao.thaismello.singUp.RegisterScreen
 import app.salao.thaismello.ui.theme.ThaisMelloTheme
-
-enum class Screen {
-    LOGIN,
-    REGISTER
-}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,35 +21,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ThaisMelloTheme(dynamicColor = false) {
-                NavigationController()
+                SalaoApp()
             }
         }
     }
 }
 
-@Composable
-fun NavigationController() {
-    var currentScreen by remember { mutableStateOf(Screen.LOGIN) }
 
-    when (currentScreen) {
-        Screen.LOGIN -> {
-            LoginScreen(
-                onNavigateToRegister = {
-                    currentScreen = Screen.REGISTER
-                }
-            )
-        }
-        Screen.REGISTER -> {
-            RegisterScreen(
-                onCreateAccount = {
-                    // TODO: Implementar lógica de criação de conta
-                    // Após criar conta, pode navegar para login ou outra tela
-                    currentScreen = Screen.LOGIN
-                },
-                onNavigateToLogin = {
-                    currentScreen = Screen.LOGIN
-                }
-            )
-        }
-    }
-}
+

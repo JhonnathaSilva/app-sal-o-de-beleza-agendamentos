@@ -69,34 +69,12 @@ fun RegisterScreen(
 ) {
     val context = LocalContext.current
 
-    var birthDate by rememberSaveable { mutableStateOf("") }
-    var password by rememberSaveable { mutableStateOf("") }
-    var confirmPassword by rememberSaveable { mutableStateOf("") }
     var showPassword by rememberSaveable { mutableStateOf(false) }
     var showConfirmPassword by rememberSaveable { mutableStateOf(false) }
     var acceptedTerms by rememberSaveable { mutableStateOf(false) }
-
-    var emailError by remember { mutableStateOf<String?>(null) }
-    var phoneError by remember { mutableStateOf<String?>(null) }
-    var birthDateError by remember { mutableStateOf<String?>(null) }
-    var passwordError by remember { mutableStateOf<String?>(null) }
-    var confirmPasswordError by remember { mutableStateOf<String?>(null) }
     var termsError by remember { mutableStateOf<String?>(null) }
-
     val scrollState = rememberScrollState()
 
-    val isFormValid =
-    //       fullName.isNotBlank() &&
-    //             email.isNotBlank() &&
-        // phone.isNotBlank() &&
-        birthDate.isNotBlank() &&
-                password.length >= 8 &&
-                confirmPassword == password &&
-                acceptedTerms &&
-                emailError == null &&
-                phoneError == null &&
-                passwordError == null &&
-                confirmPasswordError == null
 
     Surface(
         modifier = Modifier
@@ -146,7 +124,7 @@ fun RegisterScreen(
             ) {
                 SalonTextField(
                     value = singUpViewModel.formState.name.field,
-                    label = "Nome completo",
+                    label = "Nome",
                     placeholder = "Maria Silva",
                     leadingIcon = {
                         Icon(
@@ -207,10 +185,10 @@ fun RegisterScreen(
                             contentDescription = "Ícone de calendário"
                         )
                     },
-                    keyboardType = KeyboardType.Text,
+                    keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Next,
                     isError = singUpViewModel.formState.birthDate.error
-                ){ singUpViewModel.UpdateBirthday(it.text) }
+                ) { singUpViewModel.updateBirthday(it.text) }
 
 
                 SalonTextField(
@@ -343,10 +321,10 @@ fun RegisterScreen(
 //                    validateConfirmPassword(confirmPassword)
                     termsError =
                         if (!acceptedTerms) "É necessário aceitar os termos" else null
-
-                    if (isFormValid) {
-                        onCreateAccount()
-                    }
+//
+//                    if (isFormValid) {
+//                        onCreateAccount()
+//                    }
                 },
                 color1 = Gold,
                 color2 = ColorGoldLight,
@@ -378,17 +356,6 @@ fun RegisterScreen(
 
             Spacer(modifier = Modifier.height(40.dp))
         }
-    }
-}
-
-private fun formatPhone(digits: String): String {
-    if (digits.isEmpty()) return ""
-
-    val d = digits.take(11)
-    return when {
-        d.length <= 2 -> "(${d}"
-        d.length <= 7 -> "(${d.substring(0, 2)}) ${d.substring(2)}"
-        else -> "(${d.substring(0, 2)}) ${d.substring(2, 7)}-${d.substring(7)}"
     }
 }
 

@@ -103,8 +103,7 @@ fun SalonTextField(
                 singleLine = true,
                 shape = RoundedCornerShape(12.dp),
               modifier = Modifier
-                   .fillMaxWidth()
-                    .background(Color.Transparent),
+                .fillMaxWidth(),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Gold,
                     unfocusedBorderColor = DarkGray,

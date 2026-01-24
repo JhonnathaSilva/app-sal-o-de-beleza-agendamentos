@@ -92,7 +92,7 @@ class SingUpViewModel : ViewModel() {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
-    fun UpdateBirthday(newBirthday: String) {
+    fun updateBirthday(newBirthday: String) {
         val pattern = "##/##/####"
         val currentBithDay = formState.birthDate.field
         val result = Mask(pattern, currentBithDay, newBirthday)
