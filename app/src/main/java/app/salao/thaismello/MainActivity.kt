@@ -9,8 +9,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import app.salao.thaismello.screen.LoginScreen
-import app.salao.thaismello.screen.RegisterScreen
+import app.salao.thaismello.login.LoginScreen
+import app.salao.thaismello.singUp.RegisterScreen
 import app.salao.thaismello.ui.theme.ThaisMelloTheme
 
 enum class Screen {
@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            ThaisMelloTheme {
+            ThaisMelloTheme(dynamicColor = false) {
                 NavigationController()
             }
         }

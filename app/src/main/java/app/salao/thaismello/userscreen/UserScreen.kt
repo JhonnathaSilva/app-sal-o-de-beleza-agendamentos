@@ -1,4 +1,4 @@
-package app.salao.thaismello.screen
+package app.salao.thaismello.userscreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -9,6 +9,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -25,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import app.salao.thaismello.componente.UserSchedule
 import app.salao.thaismello.model.ScheduleItem
 import app.salao.thaismello.ui.theme.ColorGoldLight
+import app.salao.thaismello.ui.theme.DarkGray
 import app.salao.thaismello.ui.theme.Gold
 import app.salao.thaismello.ui.theme.NearBlack
 
@@ -44,9 +50,9 @@ val sampleSchedules = listOf(
         hours = "14:30",
         timeProcedure = "Duração: 2h 30min",
         price = 250.0
-    ),
-
     )
+
+)
 
 @Composable
 fun UserScreen() {
@@ -54,8 +60,24 @@ fun UserScreen() {
         containerColor = Color.Transparent,
         modifier = Modifier
             .fillMaxSize()
-           .background(Color.DarkGray)
-            //.background(brush = Brush.verticalGradient(colors = listOf(Gold, NearBlack, DarkGray,LightGray)))
+        //   .background(Color.DarkGray),
+        .background(brush = Brush.verticalGradient(colors = listOf( Gold, NearBlack, DarkGray))),
+        floatingActionButton = {
+            FloatingActionButton(
+                //modifier = Modifier.background(Color.Red),
+                onClick = {  },
+                shape = RoundedCornerShape(20),
+                containerColor = Gold,
+                elevation = FloatingActionButtonDefaults.elevation(
+                    defaultElevation = 10.dp,
+                    pressedElevation = 20.dp
+                ),
+                content = {
+                    Icon(imageVector = Icons.Outlined.Add, contentDescription = null)
+                }
+            )
+        }
+
     ) { contentPadding ->
         Column(
             modifier = Modifier

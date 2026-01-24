@@ -10,4 +10,6 @@
     <string name="entrar">Entrar</string>
     <string name="ainda_n_o_tem_uma_conta">Ainda não tem uma conta?</string>
     <string name="cadastre_se_gratuitamente">Cadastre-se gratuitamente</string>
+    <string name="icone_de_um_calendario">item de um calendario\n</string>
+    <string name="icone_de_um_relogio">icone de um relogio</string>
 </resources>

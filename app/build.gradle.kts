@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -42,6 +43,11 @@ android {
 }
 
 dependencies {
+    // ...
+
+    // ADICIONE ESTA LINHA PARA CONECTAR O VIEWMODEL AO COMPOSE
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

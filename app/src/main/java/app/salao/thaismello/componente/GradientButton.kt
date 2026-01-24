@@ -26,11 +26,10 @@ import app.salao.thaismello.ui.theme.NearBlack
 fun GradientButton(
     modifier: Modifier = Modifier,
     text: String,
-    onClick: () -> Unit,
     color1: Color = Gold,
     color2: Color = ColorGoldLight,
-    textColor: Color = Color.Black
-
+    textColor: Color = Color.Black,
+    onClick: () -> Unit
 ) {
     val shape = RoundedCornerShape(20)
 

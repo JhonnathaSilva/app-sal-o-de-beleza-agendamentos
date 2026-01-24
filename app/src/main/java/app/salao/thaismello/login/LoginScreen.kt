@@ -1,4 +1,4 @@
-package app.salao.thaismello.screen
+package app.salao.thaismello.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +26,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -43,6 +44,10 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
+import androidx.lifecycle.viewmodel.compose.viewModel // <-- IMPORTAÇÃO NECESSÁRIA
+
+
 import app.salao.thaismello.R
 import app.salao.thaismello.componente.GradientButton
 import app.salao.thaismello.componente.PhotoIcon
@@ -50,15 +55,21 @@ import app.salao.thaismello.ui.theme.DarkGray
 import app.salao.thaismello.ui.theme.Gold
 import app.salao.thaismello.ui.theme.LightGray
 import app.salao.thaismello.ui.theme.NearBlack
+import app.salao.thaismello.viewmodels.LoginViewModel
+import kotlin.Unit
 
 @Composable
 fun LoginScreen(
+    loginViewModel: LoginViewModel = viewModel(),
     onNavigateToRegister: () -> Unit = {}
 ) {
-    var email by rememberSaveable { mutableStateOf("") }
-    var password by rememberSaveable { mutableStateOf("") }
+
     var passwordHidden by rememberSaveable { mutableStateOf(true) }
+
+
     val scrollState = rememberScrollState()
+
+    val uiState by loginViewModel.uiState.collectAsState()
 
     Surface(
         modifier = Modifier
@@ -68,14 +79,14 @@ fun LoginScreen(
                     colors = listOf(Gold, NearBlack, DarkGray),
                     startY = 0.0f
                 )
-            ),
+            ).verticalScroll(state = scrollState),
         color = Color.Transparent
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 20.dp)
-                .verticalScroll(state = scrollState),
+                .padding(horizontal = 20.dp),
+
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -104,13 +115,14 @@ fun LoginScreen(
 
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(17.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
 
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = email,
-                    onValueChange = { email = it },
+                    value = loginViewModel.email,
+                    onValueChange = { loginViewModel.updateEmail(it) },
+                    maxLines = 1,
                     singleLine = true,
                     label = {
                         Text(text = "E-mail")
@@ -138,8 +150,9 @@ fun LoginScreen(
 
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = password,
-                    onValueChange = { password = it },
+                    value = loginViewModel.password,
+                    onValueChange = { loginViewModel.updatePassword(it) },
+                    maxLines = 1,
                     label = { Text("Senha") },
                     shape = RoundedCornerShape(20),
                     placeholder = { Text("******") },
@@ -159,8 +172,8 @@ fun LoginScreen(
                         IconButton(onClick = { passwordHidden = !passwordHidden }) {
                             Icon(
                                 imageVector = if (passwordHidden)
-                                    Icons.Outlined.Visibility
-                                else Icons.Outlined.VisibilityOff,
+                                    Icons.Outlined.VisibilityOff
+                                else Icons.Outlined.Visibility,
                                 contentDescription = if (passwordHidden)
                                     stringResource(R.string.mostrar_senha)
                                 else stringResource(R.string.esconder_senha)
@@ -184,9 +197,10 @@ fun LoginScreen(
                     verticalArrangement = Arrangement.spacedBy(15.dp)
                 ) {
                     GradientButton(
-                        onClick = {},
                         text = stringResource(R.string.entrar)
-                    )
+                    ) {
+                        loginViewModel.singIn()
+                    }
 
                     GradientButton(
                         onClick = {},

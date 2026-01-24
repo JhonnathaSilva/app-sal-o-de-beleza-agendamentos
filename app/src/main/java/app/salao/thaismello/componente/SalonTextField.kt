@@ -16,8 +16,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,32 +27,57 @@ import app.salao.thaismello.ui.theme.DarkGray
 import app.salao.thaismello.ui.theme.Gold
 import app.salao.thaismello.ui.theme.LightGray
 import app.salao.thaismello.ui.theme.MediumGray
-//
+import org.w3c.dom.Text
+
 @Composable
 fun SalonTextField(
     value: String,
-    onValueChange: (String) -> Unit,
     label: String,
     placeholder: String,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     keyboardType: KeyboardType,
     imeAction: ImeAction,
-    isError: Boolean,
-    errorMessage: String?,
+    isError: String? = null,
     readOnly: Boolean = false,
-    onClick: (() -> Unit)? = null,
-    visualTransformation: VisualTransformation = VisualTransformation.None
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    onValueChange: (String) -> Unit
+){
+    SalonTextField(
+        value = TextFieldValue(value, selection = TextRange(value.length)),
+        label = label,
+        placeholder = placeholder,
+        leadingIcon = leadingIcon,
+        trailingIcon = trailingIcon,
+        keyboardType = keyboardType,
+        imeAction = imeAction,
+        isError = isError,
+        readOnly = readOnly,
+        visualTransformation = visualTransformation,
+    ) {
+        onValueChange(it.text)
+    }
+}
+//
+@Composable
+fun SalonTextField(
+    value: TextFieldValue,
+    label: String,
+    placeholder: String,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    keyboardType: KeyboardType,
+    imeAction: ImeAction,
+    isError: String? = null,
+    readOnly: Boolean = false,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    onValueChange: (TextFieldValue) -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 16.dp)
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
+
             OutlinedTextField(
                 value = value,
                 onValueChange = {
@@ -67,19 +94,17 @@ fun SalonTextField(
                 },
                 leadingIcon = leadingIcon,
                 trailingIcon = trailingIcon,
-                isError = isError,
+                isError = isError != null,
+                supportingText = {
+                    isError?.let { msg ->
+                        Text(text = msg)
+                    }
+                },
                 singleLine = true,
                 shape = RoundedCornerShape(12.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.Transparent)
-                    .then(
-                        if (onClick != null || readOnly) {
-                            Modifier.clickable { onClick?.invoke() }
-                        } else {
-                            Modifier
-                        }
-                    ),
+              modifier = Modifier
+                   .fillMaxWidth()
+                    .background(Color.Transparent),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Gold,
                     unfocusedBorderColor = DarkGray,
@@ -107,14 +132,6 @@ fun SalonTextField(
             )
         }
 
-        if (isError && !errorMessage.isNullOrBlank()) {
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = errorMessage,
-                color = Color(0xFFF44336),
-                fontSize = 12.sp
-            )
-        }
-    }
+
 }
 
