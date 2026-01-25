@@ -1,5 +1,6 @@
 package app.salao.thaismello.login
 
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -44,19 +45,16 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
-import androidx.lifecycle.viewmodel.compose.viewModel // <-- IMPORTAÇÃO NECESSÁRIA
-
-
+import androidx.lifecycle.viewmodel.compose.viewModel
 import app.salao.thaismello.R
 import app.salao.thaismello.componente.GradientButton
 import app.salao.thaismello.componente.PhotoIcon
+import app.salao.thaismello.componente.SalonTextField
 import app.salao.thaismello.ui.theme.DarkGray
 import app.salao.thaismello.ui.theme.Gold
 import app.salao.thaismello.ui.theme.LightGray
 import app.salao.thaismello.ui.theme.NearBlack
 import app.salao.thaismello.viewmodels.LoginViewModel
-import kotlin.Unit
 
 @Composable
 fun LoginScreen(
@@ -80,12 +78,13 @@ fun LoginScreen(
                     colors = listOf(Gold, NearBlack, DarkGray),
                     startY = 0.0f
                 )
-            ).verticalScroll(state = scrollState),
+            ),
         color = Color.Transparent
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .verticalScroll(state = scrollState)
                 .padding(horizontal = 20.dp),
 
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -116,47 +115,28 @@ fun LoginScreen(
 
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
+                verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
-
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(),
+                SalonTextField(
                     value = loginViewModel.email,
-                    onValueChange = { loginViewModel.updateEmail(it) },
-                    maxLines = 1,
-                    singleLine = true,
-                    label = {
-                        Text(text = "E-mail")
-                    },
-                    shape = RoundedCornerShape(20),
-                    placeholder = { Text("seu@email.com") },
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Email,
-                        imeAction = ImeAction.Next,
-                    ),
+                    label = "E-mail",
+                    placeholder = "seu@email.com",
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Outlined.MailOutline,
                             contentDescription = stringResource(R.string.icone_de_uma_carta)
                         )
                     },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        unfocusedContainerColor = DarkGray,
-                        focusedContainerColor = DarkGray,
-                        focusedLeadingIconColor = Gold,
-                        focusedBorderColor = Gold,
-                        unfocusedBorderColor = DarkGray,
-                    )
-                )
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next,
+                ) { loginViewModel.updateEmail(it) }
 
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(),
+                SalonTextField(
                     value = loginViewModel.password,
-                    onValueChange = { loginViewModel.updatePassword(it) },
-                    maxLines = 1,
-                    label = { Text("Senha") },
-                    shape = RoundedCornerShape(20),
-                    placeholder = { Text("******") },
+                    label = "Senha",
+                    placeholder = "********",
+                    keyboardType = KeyboardType.NumberPassword,
+                    imeAction = ImeAction.Done,
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Outlined.Lock,
@@ -165,10 +145,6 @@ fun LoginScreen(
                     },
                     visualTransformation = if (passwordHidden)
                         PasswordVisualTransformation() else VisualTransformation.None,
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.NumberPassword,
-                        imeAction = ImeAction.Done
-                    ),
                     trailingIcon = {
                         IconButton(onClick = { passwordHidden = !passwordHidden }) {
                             Icon(
@@ -181,15 +157,7 @@ fun LoginScreen(
                             )
                         }
                     },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        unfocusedContainerColor = DarkGray,
-                        focusedContainerColor = DarkGray,
-                        focusedLeadingIconColor = Gold,
-                        focusedBorderColor = Gold,
-                        focusedTrailingIconColor = Gold,
-                        unfocusedBorderColor = DarkGray,
-                    )
-                )
+                ) { loginViewModel.updatePassword(it) }
 
                 Spacer(modifier = Modifier.height(25.dp))
 
@@ -204,12 +172,11 @@ fun LoginScreen(
                     }
 
                     GradientButton(
-                        onClick = {},
+                        color1 = LightGray,
+                        color2 = DarkGray,
                         text = stringResource(R.string.esqueceu_a_senha),
-                        textColor = Gold,
-                        color1 = Color(0xFF2A2A2A),
-                        color2 = Color(0xFF3A3A3A)
-                    )
+                        textColor = Gold
+                    ) {}
                 }
 
                 Spacer(modifier = Modifier.height(25.dp))

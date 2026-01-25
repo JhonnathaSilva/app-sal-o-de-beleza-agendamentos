@@ -1,9 +1,6 @@
 package app.salao.thaismello.singUp
 
-data class FieldState(
-    var field: String = "",
-    var error: String? = null
-)
+import app.salao.thaismello.validation.TextString
 
 data class FormState(
     val email: FieldState = FieldState(),
@@ -12,4 +9,12 @@ data class FormState(
     val name: FieldState = FieldState(),
     val phone: FieldState = FieldState(),
     val birthDate: FieldState = FieldState(),
+    val formIsValid: Boolean = false,
 )
+
+data class FieldState(
+    var field: String = "",
+    var error: TextString? = null,
+    val isValid: Boolean = false
+)
+

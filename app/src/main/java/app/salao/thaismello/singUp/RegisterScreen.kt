@@ -120,7 +120,7 @@ fun RegisterScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Column(
-                verticalArrangement = Arrangement.spacedBy(3.dp)
+                verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 SalonTextField(
                     value = singUpViewModel.formState.name.field,
@@ -134,7 +134,7 @@ fun RegisterScreen(
                     },
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Next,
-                    isError = singUpViewModel.formState.name.error
+                    isError = singUpViewModel.formState.name.error?.value,
                 ) { name -> singUpViewModel.updateName(name) }
 
                 SalonTextField(
@@ -149,7 +149,7 @@ fun RegisterScreen(
                     },
                     keyboardType = KeyboardType.Email,
                     imeAction = ImeAction.Next,
-                    isError = singUpViewModel.formState.email.error,
+                    isError = singUpViewModel.formState.email.error?.value,
                 ) { email -> singUpViewModel.updateEmail(email) }
 
                 // Telefone
@@ -168,7 +168,7 @@ fun RegisterScreen(
                     },
                     keyboardType = KeyboardType.Phone,
                     imeAction = ImeAction.Next,
-                    isError = singUpViewModel.formState.phone.error,
+                    isError = singUpViewModel.formState.phone.error?.value,
                 ) { phone -> singUpViewModel.updatePhone(phone.text) }
 
 
@@ -187,7 +187,7 @@ fun RegisterScreen(
                     },
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Next,
-                    isError = singUpViewModel.formState.birthDate.error
+                    isError = singUpViewModel.formState.birthDate.error?.value
                 ) { singUpViewModel.updateBirthday(it.text) }
 
 
@@ -212,7 +212,7 @@ fun RegisterScreen(
                     keyboardType = KeyboardType.NumberPassword,
                     imeAction = ImeAction.Next,
                     visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
-                    isError = singUpViewModel.formState.password.error,
+                    isError = singUpViewModel.formState.password.error?.value,
                 ) { password -> singUpViewModel.updatePassword(password) }
 
                 SalonTextField(
@@ -236,107 +236,22 @@ fun RegisterScreen(
                     keyboardType = KeyboardType.NumberPassword,
                     imeAction = ImeAction.Done,
                     visualTransformation = if (showConfirmPassword) VisualTransformation.None else PasswordVisualTransformation(),
-                    isError = singUpViewModel.formState.confirmPassword.error,
+                    isError = singUpViewModel.formState.confirmPassword.error?.value,
                 ) { confirmPassword -> singUpViewModel.updatePasswordConfirm(confirmPassword) }
             }
-
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Checkbox(
-                        checked = acceptedTerms,
-                        onCheckedChange = {
-                            acceptedTerms = it
-                            termsError = if (!it) "É necessário aceitar os termos" else null
-                        },
-                        colors = CheckboxDefaults.colors(
-                            checkedColor = Gold,
-                            uncheckedColor = LightGray,
-                            checkmarkColor = Color.Black
-                        )
-                    )
-
-                    Row(
-                        modifier = Modifier.padding(start = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "Concordo com ",
-                            color = LightGray,
-                            fontSize = 12.sp
-                        )
-                        Text(
-                            text = "Termos de Uso",
-                            color = Gold,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            modifier = Modifier.clickable {
-                                // TODO: navegar para termos de uso
-                            }
-                        )
-                        Text(
-                            text = " e ",
-                            color = LightGray,
-                            fontSize = 12.sp
-                        )
-                        Text(
-                            text = "Política de Privacidade",
-                            color = Gold,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            modifier = Modifier.clickable {
-                                // TODO: navegar para política de privacidade
-                            }
-                        )
-                    }
-                }
-
-                if (termsError != null) {
-                    Text(
-                        text = termsError ?: "",
-                        color = Color(0xFFF44336),
-                        fontSize = 12.sp
-                    )
-                }
-            }
-
             Spacer(modifier = Modifier.height(24.dp))
 
             GradientButton(
                 text = "Criar Conta",
-                onClick = {
-                    // Valida tudo ao clicar
-                    //fullNameError = if (fullName.isBlank()) "Nome é obrigatório" else null
-                    // validateEmail(email)
-                    //validatePhone(phone)
-//                    validateBirthDate(birthDate)
-//                    validatePassword(password)
-//                    validateConfirmPassword(confirmPassword)
-                    termsError =
-                        if (!acceptedTerms) "É necessário aceitar os termos" else null
-//
-//                    if (isFormValid) {
-//                        onCreateAccount()
-//                    }
-                },
-                color1 = Gold,
-                color2 = ColorGoldLight,
                 textColor = Color.Black,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
-            )
+                enabled = singUpViewModel.formState.formIsValid,
 
-            Spacer(modifier = Modifier.height(16.dp))
+            ){}
+
+            Spacer(modifier = Modifier.height(10.dp))
 
             Row(
+                horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
@@ -353,7 +268,6 @@ fun RegisterScreen(
                     )
                 }
             }
-
             Spacer(modifier = Modifier.height(40.dp))
         }
     }

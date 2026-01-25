@@ -12,4 +12,16 @@
     <string name="cadastre_se_gratuitamente">Cadastre-se gratuitamente</string>
     <string name="icone_de_um_calendario">item de um calendario\n</string>
     <string name="icone_de_um_relogio">icone de um relogio</string>
+    <string name="name_is_required">Nome é obrigatório</string>
+    <string name="name_is_invalid">Nome deve ter no mínimo 3 caracteres</string>
+    <string name="email_is_required">E-mail é obrigatório</string>
+    <string name="email_is_invalid">E-mail inválido</string>
+    <string name="phone_is_invalid">Telefone inválido</string>
+    <string name="password_is_required">Senha é obrigatória</string>
+    <string name="password_is_invalid">Senha deve ter no mínimo 8 caracteres</string>
+    <string name="confirm_password_is_required">Confirmação senha é obrigatória</string>
+    <string name="confirm_password_is_invalid">" Confirmar senha deve ser igual a senha"</string>
+    <string name="error_birthday_blank">Data de nascimento é obrigatório</string>
+    <string name="error_birthday_invalid">Data nascimento inválida</string>
+    <string name="error_birthday_future_invalid">Data de nascimento não pode ser maior que hoje</string>
 </resources>
